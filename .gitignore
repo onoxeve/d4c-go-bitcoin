@@ -17,3 +17,6 @@
 
 # log
 *.log
+
+# sql
+*.sql
