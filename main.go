@@ -1,18 +1,30 @@
 package main
 
 import (
+	"./bitflyer"
 	"./config"
-	"./util"
 	"fmt"
-	"log"
 )
 
 func main() {
 	// debug config settings
-	fmt.Println(config.Config.ApiKey)
-	fmt.Println(config.Config.ApiSecret)
+	//fmt.Println(config.Config.ApiKey)
+	//fmt.Println(config.Config.ApiSecret)
+	//
+	//// debug logging settings
+	//util.LoggingSettings(config.Config.LogFile)
+	//log.Println("test")
 
-	// debug logging settings
-	util.LoggingSettings(config.Config.LogFile)
-	log.Println("test")
+	// create api client
+	apiClient := bitflyer.New(config.Config.ApiKey, config.Config.ApiSecret)
+
+	// GET: Balance
+	//fmt.Println(apiClient.GetBalance())
+
+	// GET: ticker
+	ticker, _ := apiClient.GetTicker("BTC_JPY")
+	fmt.Println(ticker)
+	fmt.Println(ticker.GetMidPrice())
+	//fmt.Println(ticker.DateTime())
+	//fmt.Println(ticker.TruncateDateTime(time.Hour))
 }
